@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Parser ATS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+
+    <h1>📄 Resume Parser (ATS)</h1>
+    <input type="file" id="resume" accept=".pdf">
+<button onclick="parseResume()">Parse Resume</button>
+<pre id="result"></pre>
+
+<script>
+async function parseResume() {
+  const fileInput = document.getElementById("resume");
+  const result = document.getElementById("result");
+
+  if (!fileInput.files.length) {
+    result.textContent = "Please upload a PDF resume.";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]); // MUST be "file"
+
+  result.textContent = "Parsing resume...";
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/parse", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+    result.textContent = JSON.stringify(data, null, 2);
+  } catch (err) {
+    result.textContent = "API error. Try again.";
+  }
+}
+</script>
+  </div>
+
+  <div class="footer">
+    <p><strong>How it Works</strong></p>
+    <p>
+      Extracts structured information from resumes using Named Entity Recognition (NER),
+      PDF parsing, and rule-based matching.
+    </p>
+    <p>© 2026 Resume Parser. All Rights Reserved</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

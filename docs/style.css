@@ -1,0 +1,100 @@
+:root {
+  --card: rgba(255,255,255,0.92);
+  --text: #111;
+  --result-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --card: rgba(0,0,0,0.25);
+  --text: #fff;
+  --result-bg: rgba(0,0,0,0.2);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url("resume_ai.jpg") center / cover no-repeat fixed;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+}
+
+.container {
+  max-width: 600px;
+  margin: 10vh auto;
+  padding: 2rem;
+  background: var(--card);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+}
+
+[data-theme="dark"] .container {
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#result {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+  max-height: 500px;
+  background-color: var(--result-bg);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-family: monospace;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] #result {
+  background-color: rgba(0, 0, 0, 0.18);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer {
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+
+}
+
+
+.json-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.json-header {
+  padding: 0.6rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .json-header {
+  background: rgba(255,255,255,0.08);
+}
+
+.json-content {
+  padding: 0.6rem 0.8rem;
+  display: none;
+}
+
+.json-content.open {
+  display: block;
+}
