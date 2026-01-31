@@ -4,11 +4,17 @@ from fastapi.responses import JSONResponse
 import re
 import spacy
 import os
+import spacy.cli
 from pathlib import Path
 import pdfplumber
 
 # Load spaCy NER model
-nlp = spacy.load("en_core_web_sm")
+model_name = "en_core_web_sm"
+try:
+    nlp = spacy.load(model_name)
+except OSError:
+    spacy.cli.download(model_name)
+    nlp = spacy.load(model_name)
 
 app = FastAPI(title="Resume Parser (ATS) API")
 
