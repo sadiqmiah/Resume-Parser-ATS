@@ -2,5 +2,5 @@ fastapi==0.128.0
 uvicorn==0.40.0
 python-multipart==0.0.22
 spacy==3.8.11
+en-core-web-sm==3.8.0
 pdfplumber==0.11.9
-
