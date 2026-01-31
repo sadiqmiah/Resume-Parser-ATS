@@ -20,9 +20,10 @@ except OSError:
 app = FastAPI(title="Resume Parser (ATS) API")
 
 # Allow frontend requests
+origins = ["*"]  # for testing, allow all origins. Later, restrict to your frontend URL
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # replace with your frontend URL in production
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
