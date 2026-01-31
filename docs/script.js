@@ -9,40 +9,43 @@ toggle.addEventListener("click", () => {
 });
 
 // Resume parsing
-document.getElementById("parseBtn").addEventListener("click", async () => {
+ const parseBtn = document.getElementById("parseBtn");
   const fileInput = document.getElementById("resumeInput");
   const resultDiv = document.getElementById("result");
 
-  if (!fileInput.files.length) {
-    resultDiv.textContent = "⚠️ Please upload a PDF resume.";
-    return;
-  }
+  const API_URL = "https://resume-parser-ats-mfj0.onrender.com";
 
-  const formData = new FormData();
-  formData.append("file", fileInput.files[0]);
-
-  resultDiv.textContent = "⏳ Parsing resume...";
-
-  try {
-    const API_URL = "https://resume-parser-ats-mfj0.onrender.com/parse";
-    const response = await fetch(`${API_URL}/parse`, {
-      method: "POST",
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error("API failed");
+  parseBtn.addEventListener("click", async () => {
+    if (!fileInput.files.length) {
+      resultDiv.textContent = "⚠️ Please upload a PDF resume.";
+      return;
     }
 
-    const data = await response.json();
-    renderResult(data);
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
 
-  } catch (err) {
-    console.error(err);
-    resultDiv.textContent = "❌ API error. Is the backend running?";
-  }
+    resultDiv.textContent = "⏳ Parsing resume...";
+
+    try {
+      const response = await fetch(`${API_URL}/parse`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text);
+      }
+
+      const data = await response.json();
+      renderResult(data);
+
+    } catch (err) {
+      console.error(err);
+      resultDiv.textContent = "❌ API error. See console.";
+    }
+  });
 });
-
 function renderResult(data) {
   const resultDiv = document.getElementById("result");
   resultDiv.innerHTML = "";
