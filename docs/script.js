@@ -24,7 +24,7 @@ document.getElementById("parseBtn").addEventListener("click", async () => {
   resultDiv.textContent = "⏳ Parsing resume...";
 
   try {
-    const API_URL = "https://resume-parser-ats-mfj0.onrender.com";
+    const API_URL = "https://resume-parser-ats-mfj0.onrender.com/parse";
     const response = await fetch(`${API_URL}/parse`, {
       method: "POST",
       body: formData
