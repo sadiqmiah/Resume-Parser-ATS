@@ -3,3 +3,4 @@ uvicorn
 python-multipart
 spacy
 pdfplumber
+en-core-web-sm==3.8.0
