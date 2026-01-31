@@ -11,10 +11,10 @@ import pdfplumber
 # Load spaCy NER model
 model_name = "en_core_web_sm"
 try:
-    nlp = spacy.load(model_name)
+    nlp = spacy.load("en_core_web_sm")
 except OSError:
-    spacy.cli.download(model_name)
-    nlp = spacy.load(model_name)
+    spacy.cli.download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 app = FastAPI(title="Resume Parser (ATS) API")
 
