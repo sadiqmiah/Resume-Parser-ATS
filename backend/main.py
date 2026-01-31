@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from spacy.cli import download
 import re
 import spacy
 import os
@@ -13,7 +14,7 @@ model_name = "en_core_web_sm"
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    spacy.cli.download("en_core_web_sm")
+    download("en_core_web_sm")
     nlp = spacy.load("en_core_web_sm")
 
 app = FastAPI(title="Resume Parser (ATS) API")
