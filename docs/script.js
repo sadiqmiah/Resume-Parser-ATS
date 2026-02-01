@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 // Theme toggle
 const toggle = document.getElementById("themeToggle");
-toggle.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme");
-  const next = current === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", next);
-  toggle.textContent = next === "dark" ? "☀️" : "🌙";
-});
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      toggle.textContent = next === "dark" ? "☀️" : "🌙";
+    });
+  }
 
 // Resume parsing
  const parseBtn = document.getElementById("parseBtn");
@@ -15,11 +17,12 @@ toggle.addEventListener("click", () => {
 
   const API_URL = "https://resume-parser-ats-mfj0.onrender.com";
 
-  parseBtn.addEventListener("click", async () => {
-    if (!fileInput.files.length) {
-      resultDiv.textContent = "⚠️ Please upload a PDF resume.";
-      return;
-    }
+   if (parseBtn) {
+    parseBtn.addEventListener("click", async () => {
+      if (!fileInput.files.length) {
+        resultDiv.textContent = "⚠️ Please upload a PDF resume.";
+        return;
+      }
 
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
@@ -45,6 +48,7 @@ toggle.addEventListener("click", () => {
       resultDiv.textContent = "❌ API error. See console.";
     }
   });
+ }
 });
 function renderResult(data) {
   const resultDiv = document.getElementById("result");
@@ -80,5 +84,3 @@ function renderResult(data) {
     resultDiv.appendChild(card);
   }
 }
-
-});
